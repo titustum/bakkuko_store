@@ -1,4 +1,4 @@
-# BAKKUO E-commerce Project
+# BAKKUKO E-commerce Project
 
 ## Overview
 BAKKUO is an innovative e-commerce platform designed to promote African culture through a unique marketplace for clothing and shoes. Our mission is to provide a seamless online shopping experience that connects customers with local sellers, showcasing the richness of African heritage.
