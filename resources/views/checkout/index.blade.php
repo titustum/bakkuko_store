@@ -10,7 +10,7 @@
             @foreach($cartItems as $cartItem)
                 <div class="flex items-center justify-between p-4 border-b border-gray-200">
                     <div class="flex items-center">
-                        <img src="{{ asset('uploads/' . $cartItem->product->image_url) }}" alt="{{ $cartItem->product->name }}"
+                        <img src="{{ asset('storage/' . $cartItem->product->image_url) }}" alt="{{ $cartItem->product->name }}"
                              class="object-cover w-20 h-20 rounded">
                         <div class="ml-4">
                             <h3 class="text-lg font-medium text-gray-800">{{ $cartItem->product->name }}</h3>
