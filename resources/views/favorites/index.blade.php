@@ -8,7 +8,7 @@
             <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($favorites as $favorite)
                     <div class="p-4 bg-white border rounded-lg">
-                        <img src="{{ asset('uploads/' . $favorite->product->image_url) }}" alt="{{ $favorite->product->name }}" class="object-cover w-full h-64 mb-4 rounded-lg">
+                        <img src="{{ asset('storage/' . $favorite->product->image_url) }}" alt="{{ $favorite->product->name }}" class="object-contain bg-white object-center w-full h-[300px]">
                         <h3 class="text-lg font-medium text-gray-800">{{ $favorite->product->name }}</h3>
                         <p class="text-sm text-gray-600">AUD $ {{ number_format($favorite->product->price, 2) }}</p>
                         <form action="{{ route('favorites.destroy', $favorite->product->id) }}" method="POST" class="mt-4">
