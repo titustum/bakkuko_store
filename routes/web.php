@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\FavoriteController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -71,6 +73,19 @@ Route::middleware('auth')->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::post('orders/place', [OrderController::class, 'placeOrder'])->name('orders.place');
+
+
+
+
+    // Add product to favorites
+    Route::post('/favorites/{productId}', [FavoriteController::class, 'store'])->name('favorites.store');
+
+    // Remove product from favorites
+    Route::delete('/favorites/{productId}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+
+    // View user's favorites
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+
 
 });
 

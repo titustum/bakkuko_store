@@ -14,7 +14,7 @@
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($products as $product)
-                <div class="relative group">
+                <div class="relative flex flex-col group">
                     <div class="overflow-hidden transition-transform duration-300 bg-gray-100 border border-gray-200 rounded-lg aspect-w-1 aspect-h-1 group-hover:scale-105">
                         <a href="{{ route('product.show', $product->id) }}">
                             <img src="{{ asset('storage/' . $product->image_url) }}" alt="{{ $product->name }}"
@@ -27,24 +27,6 @@
                             <h3 class="text-sm font-medium text-gray-800">{{ $product->name }}</h3>
                             <p class="mt-1 text-sm text-gray-600">{{ $product->category->name }}</p>
                             <p class="mt-1 text-sm font-medium text-indigo-600">AUD $ {{ $product->price }}</p>
-                            @if($product->brand)
-                                <p class="mt-1 text-sm text-gray-600">Brand: {{ $product->brand }}</p>
-                            @endif
-                            @if($product->color)
-                                <p class="mt-1 text-sm text-gray-600">Color: {{ $product->color }}</p>
-                            @endif
-                            @if($product->material)
-                                <p class="mt-1 text-sm text-gray-600">Material: {{ $product->material }}</p>
-                            @endif
-                            @if($product->size)
-                                <p class="mt-1 text-sm text-gray-600">Size: {{ $product->size }}</p>
-                            @endif
-                            @if($product->fit)
-                                <p class="mt-1 text-sm text-gray-600">Fit: {{ $product->fit }}</p>
-                            @endif
-                            @if($product->shoe_type)
-                                <p class="mt-1 text-sm text-gray-600">Shoe Type: {{ ucfirst($product->shoe_type) }}</p>
-                            @endif
                         </div>
                         <button
                             class="p-1.5 text-gray-400 transition-colors duration-300 ease-in-out hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded-full"
@@ -55,7 +37,7 @@
                         </button>
                     </div>
 
-                    <form method="post" action="{{ route('cart.add', $product->id) }}" class="flex mt-4">
+                    <form method="post" action="{{ route('cart.add', $product->id) }}" class="flex pt-3 mt-auto">
                         @csrf
                         <button
                             class="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-opacity-50 active:bg-indigo-800">

@@ -122,14 +122,14 @@
             </div>
 
             <!-- Availability -->
-            <div>
+            {{-- <div>
                 <label for="is_available" class="block text-sm font-medium text-gray-700">Available</label>
                 <input type="checkbox" name="is_available" id="is_available" {{ old('is_available') ? 'checked' : '' }}
                     class="mt-1">
                 @error('is_available')
                     <p class="text-sm text-red-500">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             <!-- Submit Button -->
             <div>

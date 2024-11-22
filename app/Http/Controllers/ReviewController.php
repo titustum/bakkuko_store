@@ -25,6 +25,7 @@ class ReviewController extends Controller
         $review->save();
 
         // Redirect back to the product page with a success message
-        return redirect()->route('products.show', $product->id)->with('success', 'Review submitted successfully!');
+        // return redirect()->route('products.show', $product->id)->with('success', 'Review submitted successfully!');
+        return redirect()->back()->with('success', 'Review submitted successfully!');
     }
 }

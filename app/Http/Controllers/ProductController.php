@@ -51,7 +51,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'category_id' => 'nullable|exists:categories,id',
-            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'brand' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:255',
             'material' => 'nullable|string|max:255',

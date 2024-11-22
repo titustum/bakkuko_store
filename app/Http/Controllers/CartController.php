@@ -50,6 +50,7 @@ class CartController extends Controller
     {
         $user = Auth::user();
         $cart = $user->carts()->where('status', 'active')->first();
+
         $cartItems = $cart->cartItems()->get(); // This should return a collection, not an array.
 
 
