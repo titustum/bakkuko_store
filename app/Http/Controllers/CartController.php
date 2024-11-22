@@ -45,20 +45,28 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
 
-    // Display cart contents
     public function index()
     {
         $user = Auth::user();
+
+        // Find the active cart for the user
         $cart = $user->carts()->where('status', 'active')->first();
 
-        $cartItems = $cart->cartItems()->get(); // This should return a collection, not an array.
+        // Check if the cart exists, otherwise initialize empty collection and total
+        if ($cart) {
+            $cartItems = $cart->cartItems()->get(); // Get cart items if cart exists
 
+            // Calculate total price for the cart items
+            $total = $cartItems->sum(function ($item) {
+                return $item->price_at_time_of_addition * $item->quantity;
+            });
+        } else {
+            // If no cart is found, set empty collection and total to 0
+            $cartItems = collect(); // Empty collection
+            $total = 0;
+        }
 
-        // Calculate total price
-        $total = $cartItems->sum(function ($item) {
-            return $item->price_at_time_of_addition * $item->quantity;
-        });
-
+        // Return the view with cartItems and total
         return view('carts.index', compact('cartItems', 'total'));
     }
 
