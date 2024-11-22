@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->nullable();
-            $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['Pending', 'Completed', 'Cancelled']);
+            $table->foreignId('user_id')->constrained('users'); // Reference to the user who placed the order
+            $table->decimal('total_amount', 10, 2); // Total order amount
+            $table->enum('status', ['pending', 'completed', 'canceled'])->default('pending'); // Order status
+            $table->string('payment_intent_id')->nullable(); // Stripe payment intent ID (if using Stripe)
             $table->timestamps();
         });
     }

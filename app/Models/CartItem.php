@@ -9,15 +9,25 @@ class CartItem extends Model
 {
     use HasFactory;
 
+    // Fillable attributes
     protected $fillable = [
-        'user_id', 'product_id', 'quantity'
+        'cart_id',
+        'product_id',
+        'quantity',
+        'price_at_time_of_addition',
     ];
 
+    /**
+     * Get the cart that owns the cart item.
+     */
     public function cart()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Cart::class);
     }
 
+    /**
+     * Get the product associated with the cart item.
+     */
     public function product()
     {
         return $this->belongsTo(Product::class);

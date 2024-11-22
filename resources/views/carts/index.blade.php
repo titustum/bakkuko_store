@@ -16,12 +16,17 @@
                              class="object-cover w-20 h-20 rounded">
                         <div class="ml-4">
                             <h3 class="text-lg font-medium text-gray-800">{{ $cartItem->product->name }}</h3>
-                            <p class="text-sm text-gray-600">AUD $ {{ number_format($cartItem->product->price, 2) }}</p>
+                            <p class="text-sm text-gray-600">AUD $ {{ number_format($cartItem->price_at_time_of_addition, 2) }}</p>
                             <p class="text-sm text-gray-600">Quantity: {{ $cartItem->quantity }}</p>
+
+                            <!-- Additional Product Info (optional) -->
+                            <p class="text-sm text-gray-600">{{ $cartItem->product->size ? 'Size: ' . $cartItem->product->size : '' }}</p>
+                            <p class="text-sm text-gray-600">{{ $cartItem->product->color ? 'Color: ' . $cartItem->product->color : '' }}</p>
+                            <p class="text-sm text-gray-600">{{ $cartItem->product->brand ? 'Brand: ' . $cartItem->product->brand : '' }}</p>
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <p class="font-medium text-indigo-600">AUD $ {{ number_format($cartItem->product->price * $cartItem->quantity, 2) }}</p>
+                        <p class="font-medium text-indigo-600">AUD $ {{ number_format($cartItem->price_at_time_of_addition * $cartItem->quantity, 2) }}</p>
                         <a href="{{ route('cart.remove', $cartItem->id) }}" class="ml-4 text-red-500 cursor-pointer hover:text-red-700" aria-label="Remove from cart">
                             @csrf
                             <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,21 +41,22 @@
         </div>
 
         <!-- Cart Total -->
-        @if($cartItems->isNotEmpty())
-            <div class="flex justify-between mt-8 font-semibold">
-                <p>Total:</p>
-                <p>AUD $ {{ number_format($total, 2) }}</p>
-            </div>
+        @if($cartItems->isNotEmpty())  <!-- This works on collections -->
+        <div class="flex justify-between mt-8 font-semibold">
+            <p>Total:</p>
+            <p>AUD $ {{ number_format($total, 2) }}</p>
+        </div>
 
-            <!-- Checkout Button -->
-            <div class="flex justify-end mt-6">
-                <a href="{{ route('checkout.index') }}" class="flex items-center px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l1 5h13l1-5h2M3 3l1 5m-1-5h18l-1 5H7m6 4h2l3 9H8l3-9zm0 0l3-4-3 4zm-3-4h6m-6 0l-3 4" />
-                    </svg>
-                    Proceed to Checkout
-                </a>
-            </div>
+        <!-- Checkout Button -->
+        <div class="flex justify-end mt-6">
+            <a href="{{ route('checkout.index') }}" class="flex items-center px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l1 5h13l1-5h2M3 3l1 5m-1-5h18l-1 5H7m6 4h2l3 9H8l3-9zm0 0l3-4-3 4zm-3-4h6m-6 0l-3 4" />
+                </svg>
+                Proceed to Checkout
+            </a>
+        </div>
         @endif
+
     </div>
 </x-main-layout>

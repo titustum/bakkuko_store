@@ -1,5 +1,3 @@
-<!-- resources/views/checkout/index.blade.php -->
-
 <x-main-layout>
     <div class="relative bg-indigo-900">
         <div class="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
@@ -62,20 +60,22 @@
             // Disable the submit button to prevent multiple clicks
             submitButton.disabled = true;
 
-            // Get the client secret from the backend
-            const {clientSecret} = await fetch("{{ route('checkout.process') }}", {
+            // Fetch the client secret from the backend
+            const response = await fetch("{{ route('checkout.process') }}", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({
-                    amount: document.querySelector('input[name="amount"]').value,
+                    amount: document.querySelector('input[name="amount"]').value, // The amount in cents
                 }),
-            }).then(response => response.json());
+            });
 
-            // Use the Stripe.js API to handle the payment
-            const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret, {
+            const { clientSecret } = await response.json();
+
+            // Confirm the payment with Stripe
+            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
                     billing_details: {
@@ -87,9 +87,10 @@
             if (error) {
                 // Show error message to the user
                 alert(error.message);
+                submitButton.disabled = false;
             } else if (paymentIntent.status === "succeeded") {
                 // Payment successful, redirect to a success page
-                window.location.href = "/order-success";
+                window.location.href = "{{ route('checkout.success') }}";
             }
         });
     </script>

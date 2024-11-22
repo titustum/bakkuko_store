@@ -14,16 +14,34 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+    <body class="font-sans antialiased text-gray-900">
+
+        <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+
+            <!-- Left Side: Description Section -->
+            <div class="flex-col justify-center hidden p-12 text-white bg-indigo-900 lg:flex lg:w-1/2">
+                <div>
+                    <h1 class="mb-4 text-4xl font-bold">Welcome To Bakkuo Store!</h1>
+                    <p class="mb-6 text-lg">
+                        We are the number one store selling quality and genuine African fashion and footware.
+                        With over 300 products and thousands of customers, we are beyond number but service.
+                    </p>
+                </div>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+            <!-- Right Side: Login/Register Forms -->
+            <div class="flex flex-col items-center justify-center w-full p-8 lg:w-1/2 lg:p-16">
+                <div class="w-full max-w-md p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
+                    <div class="mb-8 text-center">
+                        <a href="/" class="text-orange-600">
+                            <x-application-logo class="w-24 h-24 mx-auto text-gray-500 fill-current" />
+                        </a>
+                    </div>
+
+                    <!-- Dynamic Form Content -->
+                    {{ $slot }}
+
+                </div>
             </div>
         </div>
     </body>
