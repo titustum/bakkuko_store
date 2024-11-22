@@ -10,12 +10,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name'
-    ];
+    // Define the fillable fields to allow mass assignment
+    protected $fillable = ['name', 'image_url'];
 
+    /**
+     * Get the products associated with the category.
+     */
     public function products()
     {
+        // Define the relationship with the Product model
         return $this->hasMany(Product::class);
     }
 }
