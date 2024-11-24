@@ -54,4 +54,9 @@ class Product extends Model
     public function reviews(){
         return $this->hasMany(Review::class);
     }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews->avg('rating'); // Assuming 'rating' is a column in the reviews table
+    }
 }

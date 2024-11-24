@@ -25,6 +25,18 @@
             @forelse ($categories as $category)
                 <a href="{{ route('category.show', $category->id) }}" class="group">
                     <div class="relative p-6 overflow-hidden transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 group-hover:bg-white group-hover:shadow-lg group-hover:border-indigo-100">
+                        <!-- Category Image -->
+                        <div class="hidden mb-4 md:block">
+                            @if ($category->image_url)
+                                <img src="{{ asset('storage/'. $category->image_url) }}" alt="{{ $category->name }}" class="object-cover w-full h-48 rounded-lg">
+                            @else
+                                <div class="flex items-center justify-center w-full h-48 text-gray-500 bg-gray-200 rounded-lg">
+                                    No Image
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Category Info -->
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="text-lg font-medium text-gray-900 transition-colors group-hover:text-indigo-600">
@@ -43,6 +55,7 @@
             @endforelse
         </div>
     </div>
+
 
     <!-- Featured Products -->
     <div class="px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -96,6 +109,19 @@
                 </form>
 
 
+                </div>
+
+
+                <!-- Average Rating Display -->
+                <div class="mt-4">
+                    <div class="flex items-center">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 {{ $i <= $product->average_rating ? 'text-yellow-400' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 15l-6.16 3.243L5.31 12.9 0 8.686l7.47-.645L10 2l2.53 5.041L20 8.686l-5.31 4.214 1.47 5.343L10 15z" />
+                            </svg>
+                        @endfor
+                        <span class="ml-2">({{ $product->reviews->count() }} reviews)</span>
+                    </div>
                 </div>
 
                 <form method="post" action="{{ route('cart.add', $product->id) }}" class="flex pt-3 mt-auto">

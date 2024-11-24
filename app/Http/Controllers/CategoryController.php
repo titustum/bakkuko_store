@@ -52,19 +52,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input
-        $request->validate([
-            'name' => 'required|unique:categories|max:255',
-            'image_url' => 'nullable|url',  // Optional image URL
+        // Validate the incoming request data
+        $validated = $request->validate([
+            'name' => 'required|unique:categories,name|max:255',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate the image
         ]);
 
-        // Create new category in database
+        // Handle image upload
+        if ($request->hasFile('image_url')) {
+            // Store the image and get the file path
+            $imagePath = $request->file('image_url')->store('categories', 'public');
+        } else {
+            $imagePath = null; // No image uploaded
+        }
+
+        // Create the category and save it to the database
         Category::create([
-            'name' => $request->name,
-            'image_url' => $request->image_url,
+            'name' => $validated['name'],
+            'image_url' => $imagePath,  // Store the file path in the database
         ]);
 
-        // Redirect to a page (e.g., categories.index) with a success message
+        // Redirect to the categories index or wherever you want with success message
         return redirect()->route('categories.index')->with('success', 'Category created successfully!');
     }
 }

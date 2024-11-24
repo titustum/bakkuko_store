@@ -15,8 +15,8 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount('products')->get();
-        $products = Product::with('category')->get();
+        $categories = Category::withCount('products')->limit(4)->get();
+        $products = Product::with('category')->inRandomOrder()->limit(8)->get();
         return view('welcome', compact('categories', 'products'));
     }
 }
