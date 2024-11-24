@@ -31,8 +31,11 @@
         <div class="relative flex items-center justify-between h-16">
 
             <!-- Logo -->
-            <div class="flex items-center justify-start flex-grow lg:flex-grow-0">
-                <a href="/" class="text-2xl font-bold text-indigo-600">BAKKUO</a>
+            <div class="flex items-center justify-start flex-grow space-x-2 lg:flex-grow-0">
+
+                <x-application-logo class="h-10"/>
+
+                <a href="/" class="text-2xl font-bold font-['Righteous'] text-indigo-900">BAKKUO</a>
             </div>
 
 
