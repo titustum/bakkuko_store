@@ -12,6 +12,12 @@
     <!-- Categories List -->
     <div class="px-4 py-4 mx-auto mt-8 max-w-7xl sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
             @foreach($categories as $category)
                 <div class="flex flex-col items-center p-6 bg-white border rounded-lg shadow-sm hover:shadow-lg">
                     <img src="{{ asset('uploads/' . $category->image_url) }}" alt="{{ $category->name }}" class="object-cover w-full h-48 mb-4 rounded-lg">
