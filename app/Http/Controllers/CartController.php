@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     // Add a product to the cart
-    public function add(Product $product)
+    public function add(Request $request, Product $product)
     {
         $user = Auth::user();
 
@@ -30,14 +30,19 @@ class CartController extends Controller
 
         if ($cartItem) {
             // If the product is already in the cart, increase the quantity
-            $cartItem->quantity++;
+            if($request->quantity){
+                $cartItem->quantity=$request->quantity;
+            }else{
+              $cartItem->quantity++;
+            }
+
             $cartItem->save();
         } else {
             // If the product is not in the cart, create a new cart item
             CartItem::create([
                 'cart_id' => $cart->id,
                 'product_id' => $product->id,
-                'quantity' => 1,
+                'quantity' => $request->quantity ?? 1,
                 'price_at_time_of_addition' => $product->price,  // Store the price at the time of addition
             ]);
         }

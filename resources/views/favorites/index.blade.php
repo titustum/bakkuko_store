@@ -1,4 +1,11 @@
 <x-main-layout>
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-br from-indigo-900 to-purple-900">
+        <div class="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">Favourites</h1>
+        </div>
+    </div>
+
     <div class="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <h1 class="text-2xl font-extrabold text-gray-900 lg:text-4xl">Your Favorite Products</h1>
 

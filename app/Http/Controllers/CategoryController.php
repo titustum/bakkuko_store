@@ -55,7 +55,7 @@ class CategoryController extends Controller
         // Validate the incoming request data
         $validated = $request->validate([
             'name' => 'required|unique:categories,name|max:255',
-            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate the image
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Validate the image
         ]);
 
         // Handle image upload

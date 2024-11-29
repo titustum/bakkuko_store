@@ -1,5 +1,5 @@
 <x-main-layout>
-    <div class="relative bg-indigo-900">
+    <div class="relative bg-gradient-to-br from-indigo-900 to-purple-900">
         <div class="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
             <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">Checkout</h1>
         </div>
@@ -11,7 +11,7 @@
                 <div class="flex items-center justify-between p-4 border-b border-gray-200">
                     <div class="flex items-center">
                         <img src="{{ asset('storage/' . $cartItem->product->image_url) }}" alt="{{ $cartItem->product->name }}"
-                             class="object-cover w-20 h-20 rounded">
+                             class="object-contain w-20 h-20 rounded">
                         <div class="ml-4">
                             <h3 class="text-lg font-medium text-gray-800">{{ $cartItem->product->name }}</h3>
                             <p class="text-sm text-gray-600">AUD $ {{ number_format($cartItem->product->price, 2) }}</p>
@@ -35,6 +35,12 @@
         <div class="mt-6">
             <form id="payment-form" action="{{ route('checkout.process') }}" method="POST">
                 @csrf
+
+                <div class="my-3 flex items-center space-x-2">
+                    <label for="delivery_address">Delivery Address:</label>
+                    <input type="text" name="delivery_address" class="flex-grow" placeholder="Enter delivery address">
+                </div>
+
                 <input type="hidden" name="amount" value="{{ $total * 100 }}">  <!-- Amount in cents -->
 
                 <div id="card-element"></div>
@@ -72,6 +78,12 @@
                 }),
             });
 
+            if (!response.ok) {
+                alert('Error: Failed to retrieve client secret');
+                submitButton.disabled = false;
+                return;
+            }
+
             const { clientSecret } = await response.json();
 
             // Confirm the payment with Stripe
@@ -89,9 +101,36 @@
                 alert(error.message);
                 submitButton.disabled = false;
             } else if (paymentIntent.status === "succeeded") {
-                // Payment successful, redirect to a success page
-                window.location.href = "{{ route('checkout.success') }}";
+                alert("Successfully paid!!");
+
+                // Send the payment intent ID and amount to the backend to create the order
+                fetch("{{ route('checkout.success') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    },
+                    body: JSON.stringify({
+                        payment_id: paymentIntent.id,
+                        total_amount: document.querySelector('input[name="amount"]').value,  // The total amount from frontend
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.order_id) {
+                        // Redirect to the success page with the order ID
+                        window.location.href = "{{ route('checkout.success') }}?order_id=" + data.order_id;
+                    } else {
+                        alert("Error: Unable to create order.");
+                    }
+                })
+                .catch(error => {
+                    alert("Error: " + error.message);
+                    submitButton.disabled = false;
+                });
             }
         });
     </script>
+
 </x-main-layout>

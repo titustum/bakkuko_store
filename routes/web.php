@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::view('/about', 'about-us')->name('about');
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy');
+Route::view('/frequenty-asked-questions', 'faqs')->name('faqs');
+Route::view('/terms-of-service', 'terms')->name('terms');
+Route::view('/contact-us', 'contact-us')->name('contact');
 
 
 Route::get('/dashboard', function () {
@@ -65,6 +70,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
     //success message after successful payment
     Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
+    // Route to handle order creation after successful payment
+    Route::post('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
+    // Route to display the success page with the order details
+    Route::get('/checkout/success', [CheckoutController::class, 'showSuccessPage'])->name('checkout.showSuccessPage');
 
 
 

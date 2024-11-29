@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // Reference to the user who placed the order
             $table->decimal('total_amount', 10, 2); // Total order amount
+            $table->string('delivery_address');
             $table->enum('status', ['pending', 'completed', 'canceled'])->default('pending'); // Order status
             $table->string('payment_intent_id')->nullable(); // Stripe payment intent ID (if using Stripe)
             $table->timestamps();

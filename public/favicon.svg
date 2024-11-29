@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200">
+    <!-- Outer Circle -->
+    <circle cx="150" cy="150" r="145" fill="none" stroke="#312e81" stroke-width="4"></circle>
+
+    <!-- African Continent using provided path data - scaled and centered -->
+    <g transform="translate(60, 20) scale(0.8)">
+      <path d="M79 1C56 11.3333 8.2 45.2 1 98V109C6 112.333 16.8 120.2 20 125C23.2 129.8 27.3333 127 29 125C34.6667 125 52.6 123.8 79 119C93.4 119 104.333 123 108 125L120 132V154C120 162 124.667 184.667 127 195V237L141 261L151 278L179 261C178.667 255.667 178.2 243.4 179 237C179.8 230.6 184.667 206.333 187 195L204 154L233 119C323 47 231.4 103.2 209 76C186.6 48.8 185.667 23 195 13C170.333 19.6667 117.2 31.2 102 24C86.8 16.8 80.3333 5.66667 79 1Z" fill="#312e81" stroke="#312e81" stroke-width="1"></path>
+    </g>
+
+    <!-- Company Name -->
+    <text x="150" y="270" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#312e81">
+      BAKKUO
+    </text>
+  </svg>

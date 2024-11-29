@@ -8,7 +8,7 @@
                     <img
                         src="{{ asset('storage/' . $product->image_url) }}"
                         alt="{{ $product->name }}"
-                        class="object-contain object-center w-full h-auto bg-white min-h-[400px]"
+                        class="object-contain object-center w-full h-[300px] md:h-[600px] bg-white"
                     />
                 </div>
             </div>
@@ -16,10 +16,12 @@
             <!-- Product Details -->
             <div class="flex flex-col justify-between">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-900">{{ $product->name }}</h2>
-                    <p class="mt-2 text-lg italic text-gray-600">{{ $product->category->name }}</p>
-                    <p class="mt-4 text-xl font-medium text-indigo-600">AUD ${{ $product->price }}</p>
-                    <p class="mt-2 text-gray-700">{{ $product->description }}</p>
+                    <h2 class="text-xl font-bold text-gray-900 md:text-2xl">{{ $product->name }}</h2>
+                    <p class="mt-2 italic text-gray-600 md:text-lg">{{ $product->category->name }}</p>
+                    <p class="mt-4 text-lg font-medium text-indigo-600 md:text-xl">AUD ${{ $product->price }}</p>
+                    <p class="mt-2 text-sm text-gray-700 lg:text-base">{{ $product->description }}</p>
+
+                    <hr class="my-2">
 
                     <!-- Product Attributes (New Fields) -->
                     @if($product->brand)
@@ -57,6 +59,11 @@
                     <div class="mt-4">
                         <form action="{{ route('cart.add', $product->id) }}" method="POST">
                             @csrf
+                            <div class="my-2 flex items-center space-x-2">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" name="quantity" id="quantity" value="1">
+                            </div>
+
                             <button
                                 type="submit"
                                 class="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-opacity-50 active:bg-indigo-800"

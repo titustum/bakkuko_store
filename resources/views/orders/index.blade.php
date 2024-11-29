@@ -1,4 +1,5 @@
 <x-main-layout>
+
     <!-- Orders List -->
     <div class="mt-6">
         <h2 class="text-xl font-bold">Your Orders</h2>

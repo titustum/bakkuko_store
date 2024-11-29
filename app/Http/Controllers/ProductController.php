@@ -15,10 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // Fetch all products with their associated category
-        $products = Product::with('category')->get();
+        // Fetch products with their associated category, paginated
+        $products = Product::with('category')->paginate(12); // Paginate with 12 products per page
 
-        return view('products.index', compact('products'));
+        $categories = Category::all(); // Fetch categories for the dropdown
+
+        return view('products.index', compact('products', 'categories'));
     }
 
     /**
@@ -69,8 +71,7 @@ class ProductController extends Controller
 
         // Create the product
         Product::create([
-            // 'seller_id' => auth()->id(),
-            'seller_id' => 2,
+            'seller_id' => auth()->id(),
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,

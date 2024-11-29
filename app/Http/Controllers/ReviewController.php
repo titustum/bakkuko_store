@@ -20,7 +20,7 @@ class ReviewController extends Controller
         $review = new Review();
         $review->review = $request->review;
         $review->rating = $request->rating;
-        $review->user_id = auth()->id() ?? 2; // Assuming you want to associate the review with the logged-in user
+        $review->user_id = auth()->id();
         $review->product_id = $product->id;
         $review->save();
 

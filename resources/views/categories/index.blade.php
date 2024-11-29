@@ -1,6 +1,6 @@
 <x-main-layout>
     <!-- Hero Section -->
-    <div class="relative bg-indigo-900">
+    <div class="relative overflow-hidden bg-gradient-to-br from-indigo-900 to-purple-900">
         <div class="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
             <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
                 Shop by Category
@@ -27,7 +27,7 @@
                         <!-- Category Image -->
                         <div class="mb-4">
                             @if ($category->image_url)
-                                <img src="{{ asset('storage/'. $category->image_url) }}" alt="{{ $category->name }}" class="object-cover w-full h-48 rounded-lg">
+                                <img src="{{ asset('storage/'. $category->image_url) }}" alt="{{ $category->name }}" class="object-contain w-full h-48 rounded-lg">
                             @else
                                 <div class="flex items-center justify-center w-full h-48 text-gray-500 bg-gray-200 rounded-lg">
                                     No Image

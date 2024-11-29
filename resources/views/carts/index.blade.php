@@ -1,6 +1,6 @@
 <x-main-layout>
     <!-- Hero Section -->
-    <div class="relative bg-indigo-900">
+    <div class="relative bg-gradient-to-br from-indigo-900 to-purple-900">
         <div class="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
             <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">Your Cart</h1>
         </div>
@@ -13,16 +13,16 @@
                 <div class="flex items-center justify-between p-4 border-b border-gray-200">
                     <div class="flex items-center">
                         <img src="{{ asset('storage/' . $cartItem->product->image_url) }}" alt="{{ $cartItem->product->name }}"
-                             class="object-cover w-20 h-20 rounded">
+                             class="object-contain w-20 h-20 rounded">
                         <div class="ml-4">
                             <h3 class="text-lg font-medium text-gray-800">{{ $cartItem->product->name }}</h3>
                             <p class="text-sm text-gray-600">AUD $ {{ number_format($cartItem->price_at_time_of_addition, 2) }}</p>
                             <p class="text-sm text-gray-600">Quantity: {{ $cartItem->quantity }}</p>
 
                             <!-- Additional Product Info (optional) -->
-                            <p class="text-sm text-gray-600">{{ $cartItem->product->size ? 'Size: ' . $cartItem->product->size : '' }}</p>
+                            {{-- <p class="text-sm text-gray-600">{{ $cartItem->product->size ? 'Size: ' . $cartItem->product->size : '' }}</p>
                             <p class="text-sm text-gray-600">{{ $cartItem->product->color ? 'Color: ' . $cartItem->product->color : '' }}</p>
-                            <p class="text-sm text-gray-600">{{ $cartItem->product->brand ? 'Brand: ' . $cartItem->product->brand : '' }}</p>
+                            <p class="text-sm text-gray-600">{{ $cartItem->product->brand ? 'Brand: ' . $cartItem->product->brand : '' }}</p> --}}
                         </div>
                     </div>
                     <div class="flex items-center">

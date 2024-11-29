@@ -12,8 +12,9 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_amount',
+        'delivery_address',
         'status',
-        'payment_id',  // Include payment_id in fillable attributes
+        'payment_intent_id',  // Include payment_id in fillable attributes
     ];
 
     // Relationship to OrderItems
