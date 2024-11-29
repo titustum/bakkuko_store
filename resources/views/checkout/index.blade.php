@@ -38,7 +38,7 @@
 
                 <div class="my-3 flex items-center space-x-2">
                     <label for="delivery_address">Delivery Address:</label>
-                    <input type="text" name="delivery_address" class="flex-grow" placeholder="Enter delivery address">
+                    <input type="text" name="delivery_address" required class="flex-grow" placeholder="Enter delivery address">
                 </div>
 
                 <input type="hidden" name="amount" value="{{ $total * 100 }}">  <!-- Amount in cents -->
@@ -75,6 +75,7 @@
                 },
                 body: JSON.stringify({
                     amount: document.querySelector('input[name="amount"]').value, // The amount in cents
+                    delivery_address: document.querySelector('input[name="delivery_address"]').value, // The amount in cents
                 }),
             });
 
@@ -98,6 +99,7 @@
 
             if (error) {
                 // Show error message to the user
+                console.log(error.message)
                 alert(error.message);
                 submitButton.disabled = false;
             } else if (paymentIntent.status === "succeeded") {
@@ -113,6 +115,7 @@
                     body: JSON.stringify({
                         payment_id: paymentIntent.id,
                         total_amount: document.querySelector('input[name="amount"]').value,  // The total amount from frontend
+                        delivery_address: document.querySelector('input[name="delivery_address"]').value,  // The total amount from frontend
                     }),
                 })
                 .then(response => response.json())
